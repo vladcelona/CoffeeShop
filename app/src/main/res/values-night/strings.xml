@@ -1,5 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">CoffeeShop</string>
     <string name="show_cart_text">Show cart</string>
     <string name="product_name_text">Product name</string>
     <string name="product_price_text">Product price</string>

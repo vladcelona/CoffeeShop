@@ -1,24 +1,52 @@
 package com.mirea.coffeeshop;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
-
-import androidx.activity.EdgeToEdge;
+import android.widget.ListView;
+import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
-public class CartActivity extends AppCompatActivity {
+import com.mirea.coffeeshop.adapters.CartAdapter;
+import com.mirea.coffeeshop.data_classes.Product;
+import com.mirea.coffeeshop.databinding.ActivityCartBinding;
 
+import java.util.ArrayList;
+
+public class CartActivity extends AppCompatActivity
+        implements CartAdapter.OnItemCheckListener {
+
+    private final String TAG = "CartActivity";
+
+    private ActivityCartBinding binding;
+
+    CartAdapter adapter;
+
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_cart);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+
+        binding = ActivityCartBinding.inflate(getLayoutInflater());
+
+        ArrayList<Product> checkedProducts = getIntent().getParcelableArrayListExtra("checkedProducts");
+
+        adapter = new CartAdapter(this, checkedProducts, this);
+        binding.listViewCart.setAdapter(adapter);
+
+        int totalAmount = 0;
+
+        assert checkedProducts != null;
+        for (Product product : checkedProducts) {
+            totalAmount += product.getPrice();
+        }
+
+        binding.cartTotalAmount.setText("Total Amount: " + totalAmount);
+
+        setContentView(binding.getRoot());
+    }
+
+    @Override
+    public void onItemCheckChanged() {
+
     }
 }

@@ -1,26 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
+    android:id="@+id/footer_layout"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/cart"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CartActivity"
     android:padding="8dp"
     android:orientation="vertical">
 
-    <ListView
-        android:id="@+id/list_view_cart"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
-
     <TextView
-        android:id="@+id/cart_total_amount"
+        android:id="@+id/footer_checked_items"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="8dp"
-        android:text="Total Amount: "
-        android:textSize="20sp" />
+        android:text="Checked Items: 0"
+        android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/show_cart_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Show Cart"
+        android:layout_marginTop="8dp" />
 
 </LinearLayout>
